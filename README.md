@@ -2,15 +2,15 @@
 
 ## What is pneumonoultramicroscopicsilicovolcanoconiosis?
 
-TODO
+Pneumonoultramicroscopicsilicovolcanoconiosis is the longest word in the English language. It is a synonym for silicosis.
 
 ## According to its man page, what does `getrusage` do?
 
-TODO
+getrusage returns resource usage measurements for who, which can be RUSAGE_SELF, RUSAGE_CHILDREN, or RUSAGE_THREAD
 
 ## Per that same man page, how many members are in a variable of type `struct rusage`?
 
-TODO
+16
 
 ## Why do you think we pass `before` and `after` by reference (instead of by value) to `calculate`, even though we're not changing their contents?
 
