@@ -1,0 +1,91 @@
+Hash Tables
+
+A hash table is an array of linked lists where each element of the array is a node pointer
+
+Each node has a value, as well as a pointer to the next node
+
+Our values will be char array
+The pointer to the next node, which contains a pointer to the node after that
+
+Last node points to NULL
+
+
+typedef struct node
+{
+    char word(LENGTH + 1)
+    struct node *next;
+}
+node;
+
+node *hashtable[50];    (maybe 26 for our letters of the alphabet?)
+
+node *node1 = malloc(sizeof(node));
+node *node2 = malloc(sizeof(node));
+
+Malloc gives us a pointer which indicates a spot in memory where its reserved for our char array
+and a pointer to a node
+**Whenever we are creating a node we actually just want to malloc a node pointer
+
+We then want to set the values for these nodes
+Node 1 and Node 2 are actually node pointers so we use arrow notation to access the word variable
+
+node *node1 = malloc(sizeof(node));
+node *node2 = malloc(sizeof(node));
+strcpy(node1->word, "Hello");
+strcpy(node2->word, "World");
+
+But these are just two indepent nodes, we need to link them.
+So we'll access the "next" variable for node 1 and point that to node 2
+
+node *node1 = malloc(sizeof(node));
+node *node2 = malloc(sizeof(node));
+strcpy(node1->word, "Hello");
+strcpy(node2->word, "World");
+node1->next = node2;
+
+
+MAKE A NEW WORD
+
+scan dictionary word by word using this. This will take dictionary file (called file), look for a string
+and put that string into a variable called word. And will execute this loop until the end of the dictioanry
+file is reached:
+
+we know that for every word we can, we want to malloc a node for it. and whenever we create a node we want to check
+to make sure malloc succeeded
+If it succeeds, we can copy that word into our node using string copy function
+
+while (fscanf(file, "%s", word) != EOF)
+{
+    node *new_node = malloc(sizeof(node));
+
+    if (new_node) == NULL
+    {
+        unload();
+        return false;
+    }
+
+    strcpy(new_node->word, word);
+
+    new_node-> = head;
+    head = new_node;
+
+}
+
+Now we want to insert this node to a linked list. We must maintain all links in the linked list
+We are inserting new node in the very beginning of the list, so that becomes the first value
+New node should point to whichever node was previously the first value in the list
+Point new node next to the pointer that head's pointing to
+So we have two pointers holding onto that, and we can safely reassign the head pointer to the new node
+
+
+We need a hash function to determine where to put our word
+Hash function:
+    Takes a string
+    Returns an index
+    index < the number of buckets
+    deterministic
+        the same value needs to map to the same bucket every time
+
+
+hashing new_node->word will give us the index of the bucket in the hash table
+then we insert into the linked list
