@@ -89,3 +89,55 @@ Hash function:
 
 hashing new_node->word will give us the index of the bucket in the hash table
 then we insert into the linked list
+
+
+
+CHECK FUNCTION
+
+case-insensitivity - foo, foO, FOO, all return true if foo exists in dictionary
+assume strings with only alphabetical characters and/or apostrophes
+
+Hash Table:
+
+If the word exits, it can be found in the hash table
+Which bucket would the word be in?
+    hashtable[hash(word)] ---->>> will give you index of what linked list to search
+
+Take that index an search the linked list
+    strcasecmp
+
+
+    node *cursor = hashtable[hashIndex];
+    while (cursor != NULL)
+    {
+        do something
+        cursor = cursor->next;
+
+We don't need to malloc for cursor because we are not making a new node, we are simply creating a pointer that
+will point to preexisting nodes in our linked list
+The above loop will execute as long as the cursor is not NULL
+the do something line in our case will compare strings. but that space can be used to also calculte something
+    }
+
+
+
+UNLOAD FUNCTION
+
+We need to free up all of that memory that we previously allocated
+
+Freeing linked lists:
+
+node *cursor = hashtable[hashIndex];
+
+while (cursor != NULL)
+{
+    node *temp = cursor;
+    cursor = cursor->next;
+    free(temp);
+}
+
+We assign a new node pointer called cursor to the head
+The head is the node pointer that points to the very first element of a linked list (in this case, hashtable[hashIndex];)
+Loop that advances as long as the cursor is not full
+Within that loop, we create a temporary node pointer initially pointing to cursor
+We advance the cursor and then free that temporary node pointer
