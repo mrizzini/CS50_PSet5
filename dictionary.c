@@ -15,11 +15,9 @@ typedef struct node
 node;
 node *hashtable[26]; // this is the HEAD
 
-// hash function, will return an int 0-25 for our letters of the alphabet
-int hash_function(const char *word);
-int counter;
-int hashIndex;
-
+int hash_function(const char *word); // hash function, will return an int 0-25 for our letters of the alphabet
+int counter; // this will keep track of how many words we add into our dictionary in load, and gets returned in size
+int hashIndex; // this will keep track of our index in our array of linked lists
 
 
 // Returns true if word is in dictionary else false
@@ -27,33 +25,28 @@ bool check(const char *word)
 {
     // TODO
     // int srtcasecmp(const char *string1, const char *string2);
-    // printf("%s", word);
-    int checkWord;
-    // int hashIndex = 0;
-    // int hashIndex;
-    hashIndex = hash_function(word);
-
-    // return false;
+    int compareWord;
+    hashIndex = hash_function(word); // gives us the index of the word we need to check. we know it will be in this index, if exists
 
     node *cursor = hashtable[hashIndex];
 
-
+    // while loop runs until the cursor points to NULL, which means we made it to the end of our linked list and can move onto the
+    // next index of our array of linked lists
     while (cursor != NULL)
     {
         char *wordCheck = cursor->word;
-        checkWord = strcasecmp(word, wordCheck);
-        if (checkWord == 0)
+        compareWord = strcasecmp(word, wordCheck); // compares the word with the first word of our
+        if (compareWord == 0)
         {
-            return true;
+            return true; // return if we found the word in the dictrionary
         }
         else
         {
-            // hashIndex++;
-            cursor = cursor->next;
+            cursor = cursor->next; // else we move to the next word in our linked list
         }
     }
 
-    return false;
+    return false; // return false if we didn't find word, word is mispelled
 }
 // Loads dictionary into memory, returning true if successful else false
 // Uses a data structure we have created
@@ -66,7 +59,7 @@ bool load(const char *dictionary)
 
     FILE *file = fopen(dictionary, "r"); // opens dictionary file to read
 
-    while (fscanf(file, "%s", word) != EOF)
+    while (fscanf(file, "%s", word) != EOF) // loops until it reaches end of file
     {
 
         // create new node called new_node
@@ -93,23 +86,16 @@ bool load(const char *dictionary)
         hashIndex = hash_function(word);
 
         // insert new node at head
-        new_node->next = hashtable[hashIndex];
-        hashtable[hashIndex] = new_node;
-        // new_node->next = hashtable[hashIndex];
-        //  new_node->next = NULL; // do we do this instead of the above?
+        new_node->next = hashtable[hashIndex]; // hashtable[hashIndex] is the HEAD
+        hashtable[hashIndex] = new_node; // set the head to new node
 
-// new_node->word = word
-
-        // new_node-> = head;
-        // head = new_node;
-        counter++;
+        counter++; // this is keeping track of how many words we are adding to the dictionary
     }
 
-    fclose(file);
+    fclose(file); // closes the dictionary file
 
     return true;
-    // return true if successful
-    // return false;
+    // return true if loop is successful
 }
 
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
@@ -137,7 +123,6 @@ bool unload(void)
 
     for (int i = 0; i < 26; i++)
     {
-
         node *cursor = hashtable[i];
 
         while (cursor != NULL)
@@ -153,8 +138,8 @@ bool unload(void)
 
 }
 
-
-int hash_function(const char* key)
+// hash function to return our index for the array of linked lists
+int hash_function(const char *key)
 {
     int hash = (tolower(key[0]) - 'A');
     return hash % 26;
