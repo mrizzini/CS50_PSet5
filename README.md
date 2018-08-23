@@ -10,5 +10,7 @@ PSet 4 - https://github.com/mrizzini/CS50_PSet4
 
 PSet 5 - https://github.com/mrizzini/CS50_PSet5
 
+PSet 6 - https://github.com/mrizzini/CS50_PSet6
+
 
 
