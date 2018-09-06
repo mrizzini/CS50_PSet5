@@ -14,5 +14,7 @@ PSet 6 - https://github.com/mrizzini/CS50_PSet6
 
 PSet 7 - https://github.com/mrizzini/CS50_PSet7
 
+PSet 8- https://github.com/mrizzini/CS50_PSet8
+
 
 
